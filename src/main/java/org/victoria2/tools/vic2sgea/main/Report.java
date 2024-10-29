@@ -136,7 +136,7 @@ public class Report {
      * @throws IOException
      */
     private void readCountryNames(File file) throws IOException {
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), "Cp1251"); // This encoding seems to work for ö and ü
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), "GBK"); // This encoding is the main code of Chinese Loc
         BufferedReader in = new BufferedReader(reader);
 
         String line;

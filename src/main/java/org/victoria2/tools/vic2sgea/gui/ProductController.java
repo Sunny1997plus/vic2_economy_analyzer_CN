@@ -34,12 +34,12 @@ public class ProductController extends ChartsController {
         }
 
         totalSum = total * product.price;
-        String title = String.format("%s %s (%.1f items, %.1f£)", name, product.getName(), total, totalSum);
+        String title = String.format("%s %s (%.1f 单位, %.1f£)", name, product.getName(), total, totalSum);
 
         Function<PieChart.Data, String> onEnter = data -> {
             Country country = report.getCountry(data.getName());
             String countryName = (country == null) ? data.getName() : country.getOfficialName();
-            return String.format("%s: %.2f items, %.2f£",
+            return String.format("%s: %.2f 单位, %.2f£",
                     countryName, data.getPieValue(), data.getPieValue() * product.price);
         };
 
@@ -51,17 +51,17 @@ public class ProductController extends ChartsController {
     ProductController(final Report report, Product product) {
         super(report);
         this.product = product;
-        addUniChart(ProductStorage::getGdp, "GDP of");
-        addUniChart(ProductStorage::getBought, "Consumers of ");
-        addUniChart(ProductStorage::getExported, "Exporters of ");
-        addUniChart(ProductStorage::getImported, "Importers of ");
+        addUniChart(ProductStorage::getGdp, "国别产量 - ");
+        addUniChart(ProductStorage::getBought, "国别消费量 - ");
+        addUniChart(ProductStorage::getExported, "国别出口量 - ");
+        addUniChart(ProductStorage::getImported, "国别进口量 - ");
         //addUniChart("maxDemand",2,0, "maxDemand ");
 /*
         addUniChart("worldmarketPool", 0, 4, "worldmarketPool ");
         addUniChart("actualSoldWorld", 1, 4, "actualSoldWorld ");
 */
-        addUniChart(ProductStorage::getTotalSupply, "Total Supply of ");
-        addUniChart(ProductStorage::getSold, "Actual Supply of ");
+        addUniChart(ProductStorage::getTotalSupply, "国别供应量 - ");
+        addUniChart(ProductStorage::getSold, "实际国别供应量 - ");
 
     }
 }

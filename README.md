@@ -1,36 +1,57 @@
-# Victoria 2 Savegame Economy Analyzer
+# 维多利亚II（Victoria II）存档经济分析器（中文版）
 
-Based on old [Nashetovich's code](http://oldforum.paradoxplaza.com/forum/showthread.php?715468) with minor changes, 
- so now it works with Java 8 and higher.
+代码原作为[Nashetovich](http://oldforum.paradoxplaza.com/forum/showthread.php?715468)。
+后由[Anton Krylov](https://github.com/aekrylov/vic2_economy_analyzer)完善并上传。
 
-## Usage
+此版本基于**Anton Krylov**版本，主要工作如下：
+1. 完成简体中文本地化。（部分描述可能不准确，需后续订正）
+2. 更改了在查阅本地化过程中，本地化文件的导入编码。采用了中国大陆常用的GBK。
+3. 修改了表格、饼图的键名。目前这些都会显示本地化名称，而非代码。
 
-1. Download [the latest release](https://github.com/aekrylov/vic2_economy_analyzer/releases) (standalone or installer)
-2. Run the app (for standalone Windows the exe in root, for standalone Linux the binary in `./bin/`)
+缩减工作：
+1. 未针对Linux平台进行本地化开发。
 
-Double-click on a table row (or single click on a chart item) opens detailed info window.
+## 用法
 
-Check out project wiki for more info.
+运行环境：Java 8及以上。
 
-## How to build
+1. 下载[最新版本](https://github.com/Sunny1997plus/vic2_economy_analyzer_CN/releases)。
+2. 运行主程序`vic2-sgea.exe`，位于文件夹根目录。
+3. 填写`存档路径`（应当是.v2文件）、`游戏路径`（应当是包含VictoriII主程序的文件夹）、`Mod路径`（应当是游戏模组的主文件夹）。
+   **特别注意**：无论是否加载了模组，`Mod路径`都必须填写一个路径。（否则会报错）
+   如果存档没有使用任何模组，`Mod路径`推荐填写一个空文件夹。
+4. 单击`加载`按钮，导入存档和游戏数据。
 
-Use `gradle run` to run the app.
+提示：
+1. 可以通过点击选项卡右侧的**＋**，来启用或关闭选项卡。选项卡亦能拖动。
+2. 双击表格中，单个选项，可以获得饼图。将光标放到饼图上可以看到细节。
+3. 执行过程中，如果遇到窗口过大的问题，可以用`Alt`+`Space`来最大化获得标题栏。随后拖动标题栏，将窗口放到期望的位置，并进行缩放。
 
-Use `gradle jpackage` to make a runtime image in `build/dist` folder (no JVM required)
+## 如何构建项目
+
+环境配置：
+1. Java 8以上的环境。需要Java Development Kits。
+2. 需要Wix程序。
+3. 需要gradle。
+
+构建：
+1. 在项目根目录下，通过命令行运行`gradle run`。
+   此过程会完成编译，并弹出程序窗口。但尚未链接。
+2. 在项目根目录下，通过命令行运行`gradle jpackage`。
+   此过程将会将上次运行的镜像链接，打包成主程序。放置在`build/dist`文件夹中。 (此过程不需要JVM)
 
 ## Troubleshooting
+- **java.lang.NullPointerException**
+
+    如果是在点击`加载`过程中弹出错误，请再次确认，你是否填写了**全部**三个路径？
 
 - **Can't load large late game file**
 
-    `-Xmx` part in the .bat file is responsible for max memory usage.
-    Change `-Xmx1024m` to bigger value, e.g. `-Xmx1500m` (should work for most systems).
+    使用文本编辑的方式，打开`.\runtime\bin\Vic2-SGEA.bat`。
+    设置`-Xmx`后面的数字。这将会使程序申请更多内存空间。`-Xmx1500m`对绝大多数机器应当都够用了。
     
-    Please note that setting this value too big can cause errors on some systems.
+    需要注意，这个值设置得过大，可能会导致操作系统不稳定。
  
 ## To do list:
 
-- [x] Upload jar files
-- [x] Test with different environments
-- [x] Improve architecture and code quality
-- [x] Implement continuous watching for game history
-- [ ] Display or export game history 
+- [ ] 整理饼图的本地化代码，避免出现关键字引用错误。

@@ -7,15 +7,15 @@
 <VBox xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.victoria2.tools.vic2sgea.gui.WatchersController" spacing="10" styleClass="window-root">
     <FilePrompt promptType="FILE" fx:id="fpHistoryFile" labelText="Save history to" labelWidth="170."/>
-    <FilePrompt promptType="DIR" fx:id="fpSaveDir" labelText="Save games directory" labelWidth="170."/>
+    <FilePrompt promptType="DIR" fx:id="fpSaveDir" labelText="存档路径" labelWidth="170."/>
 
-    <Button fx:id="btnStart" text="Start" onAction="#startWatcher"/>
+    <Button fx:id="btnStart" text="开始" onAction="#startWatcher"/>
 
 
     <TableView fx:id="tvWatcherList" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colHistoryFile" text="History file"/>
-            <TableColumn fx:id="colSaveDir" text="Save files dir"/>
+            <TableColumn fx:id="colSaveDir" text="存档路径"/>
             <TableColumn fx:id="colStatus" text="Status"/>
             <TableColumn fx:id="colActions" text="Actions"/>
         </columns>
