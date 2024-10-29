@@ -29,12 +29,12 @@ public class ProductController extends ChartsController {
 
             float value = getter.apply(productStorage);
 
-            slices.add(new ChartSlice(country.getTag(), value));
+            slices.add(new ChartSlice(country.getOfficialName(), value));
             total += value;
         }
 
         totalSum = total * product.price;
-        String title = String.format("%s %s (%.1f 单位, %.1f£)", name, product.getName(), total, totalSum);
+        String title = String.format("%s %s (%.1f 单位, %.1f£)", name, product.getLocalName(), total, totalSum);
 
         Function<PieChart.Data, String> onEnter = data -> {
             Country country = report.getCountry(data.getName());

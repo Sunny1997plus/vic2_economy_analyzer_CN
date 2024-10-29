@@ -75,7 +75,9 @@ public class Report {
         System.out.println("Loading products");
         //load all existing products
         Set<Product> products = ReportHelpers.readProducts(modPath);
+        ReportHelpers.addProductLocalNames(modPath, products);  // Get localName
         products.addAll(ReportHelpers.readProducts(gamePath));
+        ReportHelpers.addProductLocalNames(gamePath, products); // Get localName
 
         productMap = products.stream()
                 .collect(Collectors.toMap(Product::getName, Function.identity()));
@@ -183,7 +185,7 @@ public class Report {
         }
 
         //totalCountry.innerCalculations();
-        totalCountry.setOfficialName("Total");
+        totalCountry.setOfficialName("总计");
         for (Country country : countryList) {
             country.calcGdpPart(totalCountry);
         }
@@ -195,6 +197,7 @@ public class Report {
         }
 
         Product total = new Product(TOTAL_PRODUCT);
+        total.setLocalName("总计");
         float totalItems = 0;
         for (Product product : productMap.values()) {
             float volume = product.getConsumption();

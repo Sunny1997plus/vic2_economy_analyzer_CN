@@ -251,7 +251,7 @@ public class WindowController extends BaseController implements Initializable {
         lblCurrentDate.setText(report.getCurrentDate());
         lblPlayer.setText(report.getPlayerCountry().getOfficialName());
         lblStartDate.setText(report.getStartDate());
-        lblPopCount.setText(report.popCount + " pops total");
+        lblPopCount.setText("全球Pop数量（非人口数）：" + report.popCount);
     }
 
     public void setProductListController(ProductListController productListController) {

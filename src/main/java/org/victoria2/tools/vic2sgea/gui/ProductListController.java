@@ -70,7 +70,7 @@ public class ProductListController extends BaseController implements Initializab
             fillTable(selected ? productsFiltered : products);
         });
 
-        setFactory(colName, Product::getName);
+        setFactory(colName, Product::getLocalName); // Now it will be the Localisation.
         setFactory(colConsumption, Product::getConsumption, new NiceNumberConverter());
         setFactory(colRealSupply, Product::getSupply, new NiceNumberConverter());
         setFactory(colActualSupply, Product::getActualSupply, new NiceNumberConverter());

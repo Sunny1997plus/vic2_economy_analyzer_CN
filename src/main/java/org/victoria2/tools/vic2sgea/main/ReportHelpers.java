@@ -6,7 +6,7 @@ import eug.shared.GenericObject;
 import org.victoria2.tools.vic2sgea.entities.Color;
 import org.victoria2.tools.vic2sgea.entities.Product;
 
-import java.io.File;
+import java.io.*;           // I need IOException and InputStreamReader
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -81,6 +81,46 @@ public class ReportHelpers {
         }
         return products;
 
+    }
+
+    // This paragraph will get the Localisation Name In csv-type Files.
+    // And input them into Class product.
+    // After reading products, the localisation should be read right now.
+    static public void addProductLocalNames(String path, Set<Product> productlist) {
+        //Find localisation
+        //Empty-Judge first
+        if (!productlist.isEmpty()) {
+            try {
+                List<File> loclist = getLocalisationFiles(path);
+                for (File csv : loclist) {
+                    readPorductLocalNames(csv, productlist);
+                }
+            } catch (NullPointerException | IOException e) {
+                System.err.println("Nash: Some or all the of the csv files could not be loaded");
+            }
+        }
+    }
+
+    // Find localisation And inject to product.
+    static private void readPorductLocalNames(File file, Set<Product> productlist) throws IOException {
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), "GBK"); // For Chinese localisation
+        BufferedReader in = new BufferedReader(reader);
+
+        String line;
+        while ((line = in.readLine()) != null) {
+            String[] dataArray = line.split(";");
+            if (dataArray.length <= 1) // <=1 - otherwise dataArray[1] gaves Out of Boundaries exception in setCountryName(dataArray[0], dataArray[1]) some times - nash
+                continue;
+            
+            // If prod's key is identical to the key of csv and the localName isn't initialized,
+            // inject it.
+            for (Product prod : productlist) {
+                if (prod.getName().equals(dataArray[0]) && prod.getLocalName().isEmpty()) {
+                    prod.setLocalName(dataArray[1]);
+                }
+            }
+        }
+        in.close();
     }
 
     /**

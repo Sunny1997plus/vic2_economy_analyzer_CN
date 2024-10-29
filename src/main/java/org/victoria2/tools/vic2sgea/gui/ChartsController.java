@@ -76,7 +76,7 @@ public class ChartsController extends BaseController {
 
         double topValue = slices.stream().mapToDouble(ChartSlice::getValue).sum();
         if(totalValue - topValue > .001) {
-            ChartSlice others = new ChartSlice("Others", totalValue - topValue, Color.GRAY);
+            ChartSlice others = new ChartSlice("其他", totalValue - topValue, Color.GRAY);
             slices.add(others);
         }
 

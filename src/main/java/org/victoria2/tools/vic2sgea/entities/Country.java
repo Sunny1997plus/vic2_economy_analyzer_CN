@@ -110,7 +110,7 @@ public class Country extends EconomySubject implements Comparable<Country> {
     }
 
     public ProductStorage findStorage(Product product) {
-        return storageMap.computeIfAbsent(product.getName(), k -> new ProductStorage(product));
+        return storageMap.computeIfAbsent(product.getLocalName(), k -> new ProductStorage(product));
     }
 
     public long getEmployment() {

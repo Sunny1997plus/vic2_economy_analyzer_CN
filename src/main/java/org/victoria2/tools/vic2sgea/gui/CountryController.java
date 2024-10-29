@@ -21,7 +21,9 @@ public class CountryController extends ChartsController {
         List<ChartSlice> slices = storageMap.values().stream()
                 .filter(productStorage -> getter.apply(productStorage) > 0)
                 .map(productStorage -> {
-                    String name = productStorage.product.getName();
+                    // class ChartSlice should be modified meanwhile.
+                    // I want to use localName to calculate and show, but I don't want to rewrite too much.
+                    String name = productStorage.product.getLocalName();
                     double value = getter.apply(productStorage) * productStorage.getPrice();
 
                     return new ChartSlice(name, value);

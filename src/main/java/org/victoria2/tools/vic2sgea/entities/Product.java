@@ -47,20 +47,31 @@ public class Product implements Comparable<Product> {
      */
     float actualSoldWorld;
     final String name;
+    private String localName;   // Localisation Name
 
     private Color color;
 
     public Product(String name) {
         this.name = name;
+        this.localName = "";
     }
 
     public Product(String name, float basePrice) {
         this.name = name;
+        this.localName = "";
         this.basePrice = basePrice;
     }
 
     public String getName() {
         return name;
+    }
+    
+    public String getLocalName() {
+        return localName;
+    }
+    
+    public void setLocalName(String productLocalName) {
+        this.localName = productLocalName.trim();
     }
 
     public float getPrice() {
